@@ -9,9 +9,23 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <div class="text-center">       
+    <div class="text-left">
 
         <p>Your are now logged in. Use the Stock tab to browse or update stock records!</p>
+        <h1 class="display-4 text-center">Business News</h1>
+        @foreach (var article in Model.Articles)
+        {
+    <div>
+        <center><img src="@article.urlToImage" /></center>
+        <h4>@article.Title</h4>
+        <div>Summary: @article.Content</div>
+        <div>Published at: @article.PublishedAt</div>
+        <div>Link: @article.Url</div>
+        <hr />
+    </div>
+        }
+
+
     </div>
 }
 else
@@ -20,6 +34,24 @@ else
     <h1 class="display-4">Welcome</h1>
 
     <p>Create an account and login to view stock records.</p>
+</div>
+
+<div class="text-left">
+
+    <h1 class="display-4 text-center">Business News</h1>
+    @foreach (var article in Model.Articles)
+    {
+        <div>
+            <center><img src="@article.urlToImage" /></center>
+            <h4>@article.Title</h4>
+            <div>Summary: @article.Content</div>
+            <div>Published at: @article.PublishedAt</div>
+            <div>Link: @article.Url</div>
+            <hr />
+        </div>
+    }
+
+
 </div>
 
 }
