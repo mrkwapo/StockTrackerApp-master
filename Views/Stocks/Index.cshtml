@@ -1,0 +1,63 @@
+﻿@using MultiUserMVC.Areas.Identity.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <br />
+    <div class="container row p-0 m-0">
+        <div class="col-6">
+            <h2 class="text-info">Stocks</h2>
+        </div>
+        <div class="col-3 offset-3">
+            <form method="post">
+                <button type="submit" asp-controller="Stocks" asp-action="Scrape" class="btn btn-info form-control text-white" id="btnload">Update Stocks</button>
+            </form>
+        </div>
+        <div class="col-12 border p-3">
+
+            <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Last Price</th>
+                        <th>Change</th>
+                        <th>Change Percentage</th>
+                        <th>Currency</th>
+                        <th>Market Time</th>
+                        <th>Volume</th>
+                        <th>Average Volume</th>
+                        <th>Market Cap</th>
+                        <th>Date of Record</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <div class="text-center">
+        <h1 class="display-4">Stocks</h1>
+
+        <p> Create an account and/or login to view current and past stock data.</p>
+    </div>
+
+}
+
+@section Scripts{
+    <script src="~/js/stockList.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#btnload').click(async function () {
+            $(await this).html('<img src="http://www.bba-reman.com/images/fbloader.gif" />');
+            return false;
+        });
+    })
+</script>
+}
+
+
+
