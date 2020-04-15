@@ -9,10 +9,10 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <div class="text-left">
+    <div class="text-center">
 
-        <p>Your are now logged in. Use the Stock tab to browse or update stock records!</p>
-        <h1 class="display-4 text-center">Business News</h1>
+        <p>You're logged in! Use the Stocks tab to browse or update stock records.</p>
+        <h1 class="display-4">Business News</h1>
         @foreach (var article in Model.Articles)
         {
     <div>

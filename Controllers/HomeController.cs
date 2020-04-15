@@ -55,7 +55,8 @@ namespace MultiUserMVC.Controllers
                 var content = await result.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<NewsResponse>(content);
             }
-            return null;                
+            return null;
+                
 
             }       
           

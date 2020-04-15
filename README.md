@@ -32,6 +32,9 @@ I created a front end for a registered users to be able to view and update stock
 * Using OOP principles import the scraper project into the web project.
 * Ensure the request Scrape element activates the scraper system.
 
+## Extra Credit ##
+I added google's News API to the homepage of the web application.
+
 ## Language, Tools and Framework ##
 * C#
 * JavaScript
@@ -40,3 +43,4 @@ I created a front end for a registered users to be able to view and update stock
 * Microsoft SQL Database
 * Microsoft Visual Studio
 * Microsoft ASP.Net Core and Entity Framework
+* Google News API
