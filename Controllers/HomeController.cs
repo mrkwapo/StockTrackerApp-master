@@ -48,7 +48,7 @@ namespace MultiUserMVC.Controllers
            
 
             var result = await client.GetAsync(
-                $"http://newsapi.org/v2/everything?q=business&apiKey=AddYourAPIKeyHere");
+                $"http://newsapi.org/v2/everything?q=business&apiKey=278722f718e8484ebdd44ba3fb942a4f");
 
             if (result.IsSuccessStatusCode)
             {

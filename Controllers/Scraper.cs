@@ -9,12 +9,15 @@ using OpenQA.Selenium.Chrome;
 namespace MultiUserMVC.Controllers
 {
     public class Scraper : IScraper
-    {
-        private static IWebDriver driver = new ChromeDriver();
-        private WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+    {   
 
-        public void LoginYahoo()
+        public System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> GetYahooWatchlistData()
         {
+            ChromeOptions option = new ChromeOptions();
+            option.AddArgument("--headless");
+            IWebDriver driver = new ChromeDriver(option);
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+
             driver.Navigate().GoToUrl(@"https://login.yahoo.com/config/login?.intl=us&.lang=en-US&.src=finance&.done=https%3A%2F%2Ffinance.yahoo.com%2F");
 
             var userNameInputBox = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id("login-username")));
@@ -35,18 +38,20 @@ namespace MultiUserMVC.Controllers
             var watchlistLink = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.LinkText("My Watchlist")));
 
             watchlistLink.SendKeys(Keys.Enter);
+
+            var stocksTable = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id("pf-detail-table")));
+
+            System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> data = stocksTable.FindElements(By.TagName("td"));
+            return data;
         }
+
+        
 
 
         //This method scrapes, parses, adds, and returns the data in a List  
         public List<string> ParseData()
         {
-            var stocksTable = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id("pf-detail-table")));
-
-            var data = stocksTable.FindElements(By.TagName("td"));
-
-            Console.WriteLine("Successfully found data to scrape");
-
+            var data = GetYahooWatchlistData();
 
             Thread.Sleep(10000);
 
@@ -72,7 +77,6 @@ namespace MultiUserMVC.Controllers
          * and saves each stock object to the SQL database */
         public void saveStocks()
         {
-            LoginYahoo();
             List<string> parsedData = ParseData();
             var stock = new Stock();
 

@@ -44,6 +44,7 @@ namespace MultiUserMVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Scrape()
         {
+            
             var scraper = new Scraper();            
 
             scraper.saveStocks();

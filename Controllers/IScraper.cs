@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using OpenQA.Selenium;
+using System.Collections.Generic;
 
 namespace MultiUserMVC.Controllers
 {
     public interface IScraper
     {
-        void LoginYahoo();
+        System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> GetYahooWatchlistData();
         List<string> ParseData();
         void saveStocks();
     }
